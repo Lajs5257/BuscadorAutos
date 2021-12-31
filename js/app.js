@@ -58,12 +58,24 @@ function limpiarHTML() {
         resultado.firstChild.remove();
     }
 }
+//No encontramos resultado
+function noResultado() {
+    limpiarHTML();
 
+    const noResultado = document.createElement('div');
+    noResultado.classList.add('alerta', 'error');
+    noResultado.textContent = 'No hay resultados, intenta con otros terminos de búsqueda';
+    resultado.appendChild(noResultado);
+}
 //filtra los datos
 function filtrarAuto() {
     const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor);
-    //console.log(resultado);
-    mostrarAutos(resultado);
+
+    if(resultado.length) {
+        mostrarAutos(resultado);
+    }else{
+        noResultado();
+    }
 }
 
 function filtrarMarca(auto) {
