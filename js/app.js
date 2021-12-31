@@ -32,6 +32,8 @@ buscador.addEventListener('change', e => {
 
 //Funciones
 function mostrarAutos(autos){
+    limpiarHTML();
+
     // Construir el HTML de los autos
     autos.forEach(auto => {
         const autoHTML = document.createElement('p');
@@ -50,10 +52,18 @@ function llenarSelect() {
         year.appendChild(opcion); //Agregamos los años
     }
 }
+//Limpiar HTML
+function limpiarHTML() {
+    while(resultado.firstChild) {
+        resultado.firstChild.remove();
+    }
+}
+
 //filtra los datos
 function filtrarAuto() {
     const resultado = autos.filter(filtrarMarca).filter(filtrarYear).filter(filtrarMinimo).filter(filtrarMaximo).filter(filtrarPuertas).filter(filtrarTransmision).filter(filtrarColor);
-    console.log(resultado);
+    //console.log(resultado);
+    mostrarAutos(resultado);
 }
 
 function filtrarMarca(auto) {
